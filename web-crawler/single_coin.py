@@ -39,13 +39,14 @@ def scrape_product_details(url):
     sku = sku_element.find_next_sibling("td").text.strip() if sku_element else "N/A"
     
     # Extract product AUD
-    aud_element = "N/A"
+    aud_element = soup.select(".rich-text h4:nth-of-type(2)")
+    aud = aud_element[0].text.strip() if aud_element else "N/A"
 
     return {
         "URL": url,
         "Name": name,
         "SKU": sku,
-        "AUD":aud_element,
+        "AUD":aud,
         "Metal": metal,
         "Gold Content (Troy oz)": metal_content,
         "Monetary Denomination (AUD)": monetary_denomination,
@@ -72,6 +73,7 @@ def main():
             response = requests.get(url)
             soup = BeautifulSoup(response.content, "html.parser")
             links = soup.select("a[href^='https://www.perthmint.com/shop/collector-coins/coins/australian-kangaroo-2024-1oz-gold-proof-high-relief-coin/']")
+            # links = soup.select("a[href^='https://www.perthmint.com/shop/collector-coins/coins/the-jewelled-snake-2023-10oz-gold-proof-coin/']")
 
             # Add discovered links to the list of URLs to scrape
             for link in links:

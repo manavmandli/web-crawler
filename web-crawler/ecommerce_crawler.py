@@ -33,7 +33,7 @@ def main():
 
     products = []
     products_scraped = 0
-    max_products = 10
+    max_products = 20
 
     while urls_to_scrape and products_scraped < max_products:
         url = urls_to_scrape.pop()

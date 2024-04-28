@@ -1,2 +1,4 @@
 beautifulsoup4 
 requests
+requests-html
+lxml_html_clean
